@@ -1,0 +1,39 @@
+
+✨ prisma
+1. npm install prisma --save -dev
+2. npx prisma init 
+=> prisma 폴더의 schema.prisma 파일과 .env(DATABASE_URL) 생성
+3. schema.prisma 예시
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+4. schema.prisma 파일 안에 model 생성
+
+model Product {
+  id Int @default(autoincrement()) @id
+  name String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  price Float
+  sale Boolean @default(false)
+}
+
+((
+✨ docker
+1. docker-compose.yml 파일 생성
+2. 작성 후 docker-compose up 실행 
+=> ⚡ postgreSQL 서버 실행
+))
+
+
+5. npx prisma migrate dev --name "init"
+=> ⚡ 실제로 데이터베이스에 해당 테이블과 필드들이 생성됨.
+(docker-compose up을 먼저 실행해야 함)
+
+6. prisma/migration 폴더 생성됨
